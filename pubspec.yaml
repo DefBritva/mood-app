@@ -1,0 +1,33 @@
+name: mood_calendar
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.1.5 <4.0.0'
+
+dependencies:
+  equatable: ^2.0.5
+  flutter:
+    sdk: flutter
+  bloc: ^8.1.2
+  flutter_bloc: ^8.1.3
+  flutter_svg: ^2.0.9
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  hive_generator: '>=2.0.1'
+  path_provider: ^2.1.1
+  flutter_slidable: ^3.0.1
+  collection: ^1.17.2
+  flutter_local_notifications: ^16.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
