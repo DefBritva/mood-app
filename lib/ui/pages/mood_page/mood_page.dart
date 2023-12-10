@@ -7,6 +7,7 @@ import 'package:mood_calendar/app_bloc/bloc.dart';
 import 'package:mood_calendar/app_bloc/event.dart';
 import 'package:mood_calendar/app_bloc/state.dart';
 import 'package:mood_calendar/domain/entities/mood.dart';
+import 'package:mood_calendar/styles/text_styles.dart';
 import 'package:mood_calendar/utils/svg_assets.dart';
 
 class MoodPage extends StatefulWidget {
@@ -45,6 +46,13 @@ class _MoodPageState extends State<MoodPage> {
             backgroundColor: Colors.greenAccent,
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
+              leading: BackButton(
+                color: Colors.white,
+                onPressed: () {
+                  context.read<AppBloc>().add(OpenStartPage());
+                  Navigator.of(context).pop();
+                },
+              ),
               actions: [
                 isEnabled
                     ? IconButton(
@@ -60,7 +68,10 @@ class _MoodPageState extends State<MoodPage> {
                           context.read<AppBloc>().add(ChangeMood(
                               moodIndex: state.moodIndex, newMood: newMood));
                         },
-                        icon: Icon(Icons.check))
+                        icon: Icon(
+                          Icons.check,
+                          color: Colors.white,
+                        ))
                     : SizedBox(),
                 IconButton(
                     onPressed: () {
@@ -70,9 +81,15 @@ class _MoodPageState extends State<MoodPage> {
                         focus.requestFocus();
                       });
                     },
-                    icon: Icon(Icons.edit))
+                    icon: Icon(
+                      Icons.edit,
+                      color: Colors.white,
+                    ))
               ],
-              title: Text('Mood (${state.mood.data.toString()})'),
+              title: Text(
+                'Mood (${state.mood.data.toString()})',
+                style: TextStyles.textStyle,
+              ),
               centerTitle: true,
               backgroundColor: Colors.redAccent,
             ),
@@ -116,7 +133,8 @@ class _MoodPageState extends State<MoodPage> {
                             textAlign: TextAlign.center,
                             enabled: isEnabled,
                             controller: textController,
-                            style: const TextStyle(fontSize: 20),
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.black),
                             decoration:
                                 const InputDecoration.collapsed(hintText: ''),
                             maxLines: 99999,

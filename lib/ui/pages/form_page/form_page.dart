@@ -8,6 +8,7 @@ import 'package:mood_calendar/app_bloc/event.dart';
 import 'package:mood_calendar/app_bloc/state.dart';
 import 'package:mood_calendar/domain/entities/date.dart';
 import 'package:mood_calendar/domain/entities/mood.dart';
+import 'package:mood_calendar/styles/text_styles.dart';
 import 'package:mood_calendar/utils/svg_assets.dart';
 
 class FormPage extends StatefulWidget {
@@ -45,12 +46,22 @@ class _FormPageState extends State<FormPage> {
         backgroundColor: Colors.greenAccent,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          leading: BackButton(
+            color: Colors.white,
+            onPressed: () {
+              context.read<AppBloc>().add(OpenStartPage());
+              Navigator.of(context).pop();
+            },
+          ),
           backgroundColor: Colors.redAccent,
           title: BlocBuilder<AppBloc, AppState>(
             builder: (context, state) {
               if (state is CreatingMoodState) {
                 date = state.date;
-                return Text('New mood (${state.date.toString()})');
+                return Text(
+                  'New mood (${state.date.toString()})',
+                  style: TextStyles.textStyle,
+                );
               } else {
                 return SizedBox();
               }
@@ -72,7 +83,9 @@ class _FormPageState extends State<FormPage> {
                                     Navigator.of(context).pop();
                                   }
                                 },
-                                icon: Icon(Icons.check))
+                                icon: Icon(
+                                  Icons.check,
+                                ))
                           ],
                           title: Text('Mood date'),
                           content: TextField(
@@ -86,7 +99,10 @@ class _FormPageState extends State<FormPage> {
                         );
                       });
                 },
-                icon: Icon(Icons.edit_calendar_rounded))
+                icon: Icon(
+                  Icons.edit_calendar_rounded,
+                  color: Colors.white,
+                ))
           ],
           centerTitle: true,
         ),
@@ -111,7 +127,7 @@ class _FormPageState extends State<FormPage> {
                             borderRadius: BorderRadius.circular(10)),
                         hintText: 'Enter the text',
                         hintStyle:
-                            TextStyle(fontSize: 18, color: Colors.black)),
+                            TextStyle(fontSize: 16, color: Colors.black)),
                   ),
                 ),
                 SizedBox(height: 30),
@@ -236,6 +252,7 @@ class _FormPageState extends State<FormPage> {
                       shape: StadiumBorder()),
                   child: Text(
                     'Save mood',
+                    style: TextStyles.textStyle,
                   ),
                 )
               ],

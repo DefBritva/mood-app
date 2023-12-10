@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mood_calendar/app_bloc/bloc.dart';
 import 'package:mood_calendar/app_bloc/event.dart';
 import 'package:mood_calendar/app_bloc/state.dart';
+import 'package:mood_calendar/styles/text_styles.dart';
 import 'package:mood_calendar/utils/mood_dict.dart';
 import 'package:mood_calendar/utils/svg_assets.dart';
 
@@ -17,12 +18,16 @@ class StatsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
+          color: Colors.white,
           onPressed: () {
             context.read<AppBloc>().add(OpenStartPage());
             Navigator.of(context).pop();
           },
         ),
-        title: Text('Stats'),
+        title: Text(
+          'Stats',
+          style: TextStyles.textStyle,
+        ),
         centerTitle: true,
         backgroundColor: Colors.redAccent,
       ),

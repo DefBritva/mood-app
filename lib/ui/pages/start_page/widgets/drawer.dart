@@ -28,7 +28,9 @@ class MenuDrawer extends StatelessWidget {
                     context.read<AppBloc>().add(StatsOpened());
                     Navigator.of(context).pushNamed('/start/stats');
                   },
-                  child: const Text('show statistics'),
+                  child: const Text(
+                    'show statistics',
+                  ),
                 ),
               ],
             ),

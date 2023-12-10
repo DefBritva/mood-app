@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mood_calendar/app_bloc/bloc.dart';
 import 'package:mood_calendar/app_bloc/event.dart';
 import 'package:mood_calendar/app_bloc/state.dart';
+import 'package:mood_calendar/styles/text_styles.dart';
 import 'package:mood_calendar/ui/pages/start_page/widgets/drawer.dart';
 import 'package:mood_calendar/utils/mood_dict.dart';
 import 'package:mood_calendar/utils/svg_assets.dart';
@@ -23,7 +24,10 @@ class StartPage extends StatelessWidget {
           Navigator.of(context).pushNamed('/start/form');
         },
         backgroundColor: Colors.redAccent,
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
       appBar: StartPageAppBar(),
       backgroundColor: Colors.greenAccent,
@@ -131,9 +135,15 @@ class StartPageAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () {
               Scaffold.of(context).openEndDrawer();
             },
-            icon: Icon(Icons.menu))
+            icon: Icon(
+              Icons.menu,
+              color: Colors.white,
+            ))
       ],
-      title: Text('Mood calendar'),
+      title: Text(
+        'Mood calendar',
+        style: TextStyles.textStyle,
+      ),
       centerTitle: true,
       backgroundColor: Colors.redAccent,
     );
