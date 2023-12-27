@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mood_calendar/app_bloc/bloc.dart';
-import 'package:mood_calendar/app_bloc/event.dart';
-import 'package:mood_calendar/app_bloc/state.dart';
 import 'package:mood_calendar/styles/text_styles.dart';
 import 'package:mood_calendar/ui/pages/start_page/widgets/drawer.dart';
 import 'package:mood_calendar/utils/mood_dict.dart';
@@ -20,7 +18,7 @@ class StartPage extends StatelessWidget {
       endDrawer: MenuDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.read<AppBloc>().add(AddMoodClicked());
+          context.read<AppBloc>().add(AppEvent.addMood());
           Navigator.of(context).pushNamed('/start/form');
         },
         backgroundColor: Colors.redAccent,
@@ -60,9 +58,8 @@ class StartPage extends StatelessWidget {
                                       child: Text('no')),
                                   TextButton(
                                       onPressed: () {
-                                        context
-                                            .read<AppBloc>()
-                                            .add(RemoveMood(index: index));
+                                        context.read<AppBloc>().add(
+                                            AppEvent.removeMood(index: index));
                                         Navigator.of(context).pop();
                                       },
                                       child: Text('yes')),
@@ -73,7 +70,7 @@ class StartPage extends StatelessWidget {
                       onTap: () {
                         context
                             .read<AppBloc>()
-                            .add(MoodClicked(moodIndex: index));
+                            .add(AppEvent.openMood(moodIndex: index));
                         Navigator.of(context).pushNamed('/start/mood');
                       },
                       child: Container(

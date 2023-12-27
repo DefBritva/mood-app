@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mood_calendar/app_bloc/bloc.dart';
-import 'package:mood_calendar/app_bloc/event.dart';
-import 'package:mood_calendar/app_bloc/state.dart';
+
 import 'package:mood_calendar/domain/entities/date.dart';
 import 'package:mood_calendar/domain/entities/mood.dart';
 import 'package:mood_calendar/styles/text_styles.dart';
@@ -49,22 +48,21 @@ class _FormPageState extends State<FormPage> {
           leading: BackButton(
             color: Colors.white,
             onPressed: () {
-              context.read<AppBloc>().add(OpenStartPage());
+              context.read<AppBloc>().add(AppEvent.openStartPage());
               Navigator.of(context).pop();
             },
           ),
           backgroundColor: Colors.redAccent,
           title: BlocBuilder<AppBloc, AppState>(
             builder: (context, state) {
-              if (state is CreatingMoodState) {
-                date = state.date;
-                return Text(
-                  'New mood (${state.date.toString()})',
-                  style: TextStyles.textStyle,
-                );
-              } else {
-                return SizedBox();
-              }
+              return state.whenOrNull(creating: (moods, moodDate) {
+                    date = moodDate;
+                    return Text(
+                      'New mood (${moodDate.toString()})',
+                      style: TextStyles.textStyle,
+                    );
+                  }) ??
+                  SizedBox();
             },
           ),
           actions: [
@@ -78,8 +76,9 @@ class _FormPageState extends State<FormPage> {
                             IconButton(
                                 onPressed: () {
                                   if (controller.text != '') {
-                                    context.read<AppBloc>().add(ChangeMoodData(
-                                        newData: controller.text));
+                                    context.read<AppBloc>().add(
+                                        AppEvent.changeMoodData(
+                                            newData: controller.text));
                                     Navigator.of(context).pop();
                                   }
                                 },
@@ -240,7 +239,7 @@ class _FormPageState extends State<FormPage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    context.read<AppBloc>().add(SaveMoodClicked(
+                    context.read<AppBloc>().add(AppEvent.saveMood(
                         mood: Mood(
                             data: date!,
                             mood: mood ?? 'smile',

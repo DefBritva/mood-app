@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mood_calendar/app_bloc/bloc.dart';
 import 'package:mood_calendar/app_bloc/obs.dart';
-import 'package:mood_calendar/app_bloc/event.dart';
 import 'package:mood_calendar/domain/entities/date.dart';
 import 'package:mood_calendar/domain/entities/mood.dart';
 import 'package:mood_calendar/domain/services/mood_service.dart';
@@ -47,8 +46,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>
-          AppBloc(RepositoryProvider.of(context))..add(OpenStartPage()),
+      create: (BuildContext context) => AppBloc(RepositoryProvider.of(context))
+        ..add(const AppEvent.openStartPage()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mood_calendar/app_bloc/bloc.dart';
-import 'package:mood_calendar/app_bloc/event.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
@@ -25,7 +24,7 @@ class MenuDrawer extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     Scaffold.of(context).closeEndDrawer();
-                    context.read<AppBloc>().add(StatsOpened());
+                    context.read<AppBloc>().add(const AppEvent.openStats());
                     Navigator.of(context).pushNamed('/start/stats');
                   },
                   child: const Text(

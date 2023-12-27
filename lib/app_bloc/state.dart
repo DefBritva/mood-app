@@ -1,54 +1,22 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:equatable/equatable.dart';
-import 'package:mood_calendar/domain/entities/date.dart';
 
-import 'package:mood_calendar/domain/entities/mood.dart';
+part of 'bloc.dart';
 
-sealed class AppState extends Equatable {
-  final List<Mood> moods;
-
-  const AppState({required this.moods});
-}
-
-final class InitialState extends AppState {
-  const InitialState({required super.moods});
-
-  @override
-  List<Object?> get props => [moods];
-}
-
-final class StartPageState extends AppState {
-  const StartPageState({required super.moods});
-  @override
-  List<Object?> get props => [moods];
-}
-
-final class MoodOpenedState extends AppState {
-  final int moodIndex;
-  final Mood mood;
-
-  const MoodOpenedState({
-    required this.moodIndex,
-    required this.mood,
-    required super.moods,
-  });
-  @override
-  List<Object?> get props => [moodIndex, mood, moods];
-}
-
-final class CreatingMoodState extends AppState {
-  final MoodDate date;
-
-  const CreatingMoodState({required this.date, required super.moods});
-  @override
-  List<Object?> get props => [date, moods];
-}
-
-final class StatsState extends AppState {
-  final Map<String, int> stats;
-
-  const StatsState({required super.moods, required this.stats});
-
-  @override
-  List<Object?> get props => [moods, stats];
+@freezed
+class AppState with _$AppState {
+  const factory AppState.initial({required List<Mood> moods}) = _InitialState;
+  const factory AppState.start({required List<Mood> moods}) = _StartPageState;
+  const factory AppState.moodOpened({
+    required List<Mood> moods,
+    required int moodIndex,
+    required Mood mood,
+  }) = _MoodOpenedState;
+  const factory AppState.creating({
+    required List<Mood> moods,
+    required MoodDate date,
+  }) = _CreatingMoodState;
+  const factory AppState.stats({
+    required List<Mood> moods,
+    required Map<String, int> stats,
+  }) = _StatsState;
 }

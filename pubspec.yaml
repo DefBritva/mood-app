@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.1.5 <4.0.0'
 
 dependencies:
+  freezed_annotation:
   equatable: ^2.0.5
   flutter:
     sdk: flutter
@@ -22,6 +23,7 @@ dependencies:
   flutter_local_notifications: ^16.2.0
 
 dev_dependencies:
+  freezed:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
